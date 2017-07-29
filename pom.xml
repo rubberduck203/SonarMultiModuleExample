@@ -14,7 +14,6 @@
     </modules>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -34,7 +33,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <!-- Minimal supported version is 2.4 -->
                 <version>2.19.1</version>
                 <configuration>
                     <properties>
@@ -70,9 +68,9 @@
                         </goals>
                         <configuration>
                             <rules>
+                                <!-- Enabling rules here will stop builds if the code fails the rules -->
                                 <!--  implementation is needed only for Maven 2  -->
-                                    <!-- Enabling rules here will stop builds if the code fails the rules ->
-                                    <rule implementation="org.jacoco.maven.RuleConfiguration">
+                                    <!--<rule implementation="org.jacoco.maven.RuleConfiguration">
                                     <element>BUNDLE</element>
                                     <limits>
                                         &lt;!&ndash;  implementation is needed only for Maven 2  &ndash;&gt;
@@ -90,4 +88,22 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <!--
+                <sonar.host.url>
+                  http://myserver:9000
+                </sonar.host.url>
+                -->
+            </properties>
+        </profile>
+    </profiles>
 </project>
